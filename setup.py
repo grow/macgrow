@@ -22,7 +22,7 @@ OPTIONS = {
     'io',
     'json',
     'md5',
-    'multiprocessing'
+    'multiprocessing',
     'sha',
     'shutil',
     'urllib',
