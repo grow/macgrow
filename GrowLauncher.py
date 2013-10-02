@@ -2,16 +2,12 @@ from Cocoa import *
 from AppKit import NSBeep
 from GrowLauncherModel import GrowLauncherModel
 
-"""
+import os
 import sys
-sys.path.insert(0, '/Users/jeremydw/git/pygrow/')
-import grow
-from paste import httpserver
+sys.path.insert(0, os.path.join(os.environ['RESOURCEPATH'], 'pygrow'))
 
-from grow.server import handlers
-from grow.server import main as main_lib
-handlers.set_single_pod_root('/Users/jeremydw/git/grow-templates')
-"""
+print sys.path
+from grow.server import manager
 
 
 # class defined in PythonBrowser.nib
@@ -42,17 +38,17 @@ class GrowLauncherWindowController(NSWindowController):
     return cls.alloc().init()
 
   def windowWillClose_(self, notification):
+    manager.stop_all()
     self.autorelease()
 
   @objc.IBAction
   def start_(self, sender):
-    NSBeep()
-    httpserver.serve(main_lib.services_app)
-    print 'started'
+    root = '/Users/jeremydw/git/grow-templates/'
+    manager.start(root, use_subprocess=True)
 
   @objc.IBAction
   def stop_(self, sender):
-    NSBeep()
+    manager.stop_all()
 
 
 class GrowLauncherAppDelegate(NSObject):

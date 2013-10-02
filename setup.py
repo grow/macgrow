@@ -14,6 +14,24 @@ import py2app
 
 OPTIONS = {
   'iconfile': 'Icon.icns',
+  'includes': [
+    'BaseHTTPServer',
+    'Queue',
+    'cgi',
+    'htmlentitydefs',
+    'io',
+    'json',
+    'md5',
+    'multiprocessing'
+    'sha',
+    'shutil',
+    'urllib',
+    'urllib2',
+    'wsgiref',
+    'wsgiref.handlers',
+    'xml',
+    'xml.etree.ElementTree',
+  ]
 }
 
 core.setup(
@@ -23,6 +41,8 @@ core.setup(
   data_files=[
     'MainMenu.nib',
     'GrowLauncher.nib',
+    'pygrow',
   ],
+  url='http://grow.io',
   options={'py2app': OPTIONS},
 )
