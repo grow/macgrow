@@ -1,12 +1,12 @@
 from Cocoa import *
 from AppKit import NSBeep
-from GrowLauncherModel import GrowLauncherModel
 
 import os
+import webbrowser
 import sys
 sys.path.insert(0, os.path.join(os.environ['RESOURCEPATH'], 'pygrow'))
 
-print sys.path
+from GrowLauncherModel import GrowLauncherModel
 from grow.server import manager
 
 
@@ -43,12 +43,23 @@ class GrowLauncherWindowController(NSWindowController):
 
   @objc.IBAction
   def start_(self, sender):
-    root = '/Users/jeremydw/git/grow-templates/'
-    manager.start(root, use_subprocess=True)
+    selectedRow = self.tableView.selectedRow()
+    server = self.model.servers[selectedRow]
+    server.start()
+    self.tableView.reloadData()
 
   @objc.IBAction
   def stop_(self, sender):
-    manager.stop_all()
+    selectedRow = self.tableView.selectedRow()
+    server = self.model.servers[selectedRow]
+    server.stop()
+    self.tableView.reloadData()
+
+  @objc.IBAction
+  def open_(self, sender):
+    selectedRow = self.tableView.selectedRow()
+    server = self.model.servers[selectedRow]
+    webbrowser.open('http://localhost:{}'.format(server.port))
 
 
 class GrowLauncherAppDelegate(NSObject):
