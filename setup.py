@@ -36,11 +36,11 @@ OPTIONS = {
 
 core.setup(
   app=[
-    'GrowLauncher.py'
+    'MacGrow.py'
   ],
   data_files=[
     'MainMenu.nib',
-    'GrowLauncher.nib',
+    'MacGrow.nib',
     'pygrow',
   ],
   url='http://grow.io',

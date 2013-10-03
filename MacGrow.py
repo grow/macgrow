@@ -15,8 +15,8 @@ class GrowLauncherWindowController(NSWindowController):
   tableView = objc.IBOutlet()
 
   def __init__(self):
-    self = self.initWithWindowNibName_('GrowLauncher')
-    self.window().setTitle_('Grow Launcher')
+    self = self.initWithWindowNibName_('MacGrow')
+    self.window().setTitle_('MacGrow')
 
     self.model = GrowLauncherModel()
     self.tableView.setDataSource_(self.model)
@@ -60,6 +60,10 @@ class GrowLauncherWindowController(NSWindowController):
     selectedRow = self.tableView.selectedRow()
     server = self.model.servers[selectedRow]
     webbrowser.open('http://localhost:{}'.format(server.port))
+
+  @objc.IBAction
+  def helpSite_(self, sender):
+    webbrowser.open('http://docs.grow.io/macgrow')
 
 
 class GrowLauncherAppDelegate(NSObject):
