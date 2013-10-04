@@ -2,6 +2,7 @@ dist
 build
 *.py[cod]
 .DS_Store
+*.xcworkspace
 
 # C extensions
 *.so
