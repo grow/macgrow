@@ -39,8 +39,9 @@ core.setup(
     'MacGrow.py'
   ],
   data_files=[
-    'MainMenu.nib',
     'MacGrow.nib',
+    'MainMenu.nib',
+    'VERSION',
     'pygrow',
   ],
   url='http://grow.io',

@@ -14,7 +14,7 @@ from grow.server import manager
 
 # /usr/local/bin
 
-VERSION = '0.0.2'
+VERSION = open(os.path.join(os.environ['RESOURCEPATH'], 'VERSION')).read().strip()
 
 
 # class defined in PythonBrowser.nib
@@ -132,7 +132,8 @@ def alert(message="Default Message", info_text="", buttons=["OK"]):
 
 
 def check_for_updates(quiet=False):
-  version_manifest = 'http://about.grow.io/macgrow/latest.txt'
+  # Verify data.
+  version_manifest = 'https://raw.github.com/grow/macgrow/master/LICENSE'
   try:
     version = urllib.urlopen(version_manifest).read()
   except:
@@ -148,7 +149,12 @@ def check_for_updates(quiet=False):
       webbrowser.open('http://about.grow.io/macgrow')
     return
   if not quiet:
-    alert('Awesome! You have the latest version of Grow.')
+    if this_version > their_version:
+      info_text = 'And, yours is newer! ({})'.format(VERSION)
+    else:
+      info_text = ''
+    alert('Awesome! You have the latest version of Grow ({}).'.format(version.strip()),
+          info_text=info_text)
 
 
 if __name__ == '__main__':
