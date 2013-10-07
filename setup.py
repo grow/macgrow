@@ -34,6 +34,8 @@ OPTIONS = {
   ]
 }
 
+# TODO(jeremydw): Executable data files should be moved to "app".
+
 core.setup(
   app=[
     'MacGrow.py'
@@ -42,7 +44,9 @@ core.setup(
     'MacGrow.nib',
     'MainMenu.nib',
     'VERSION',
+    'cocoasudo',
     'pygrow',
+    'symlinks.py',
   ],
   url='http://grow.io',
   options={'py2app': OPTIONS},

@@ -3,18 +3,23 @@ from AppKit import *
 from Foundation import *
 
 import os
+_resource_path = os.environ['RESOURCEPATH']
+
 import urllib
+import threading
 import subprocess
 import webbrowser
 import sys
-sys.path.insert(0, os.path.join(os.environ['RESOURCEPATH'], 'pygrow'))
+sys.path.insert(0, os.path.join(_resource_path, 'pygrow'))
 
 from GrowLauncherModel import GrowLauncherModel
 from grow.server import manager
 
 # /usr/local/bin
 
-VERSION = open(os.path.join(os.environ['RESOURCEPATH'], 'VERSION')).read().strip()
+VERSION = open(os.path.join(_resource_path, 'VERSION')).read().strip()
+GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'grow', 'cli.py')
+GROW_SYMLINK = '/usr/local/bin/grow'
 
 
 # class defined in PythonBrowser.nib
@@ -37,7 +42,8 @@ class GrowLauncherWindowController(NSWindowController):
     self.showWindow_(self)
     NSApp.activateIgnoringOtherApps_(True)
 
-    check_for_updates(quiet=True)
+    thread = threading.Thread(target=check_for_updates, args=(True,))
+    thread.start()
 
     # Prevent garbage collection before window is closed.
     # It will be released in self.windowWillClose_().
@@ -96,6 +102,20 @@ class GrowLauncherWindowController(NSWindowController):
   def checkForUpdatesAction_(self, sender):
     check_for_updates(quiet=False)
 
+  @objc.IBAction
+  def makeSymlinksAction_(self, sender):
+    message = 'Install Grow commands?'
+    info_text = ('The "grow" command line utility can be installed on your Mac by creating a '
+                 'symlink in /usr/local/bin/grow. This makes it incredibly easy to use Grow '
+                 'from the command line.\n\nAn authorization will be required.')
+    resp = alert(message=message, info_text=info_text, buttons=['OK', 'Cancel'])
+    if resp != 1000:
+      return
+    path = os.path.join(_resource_path, 'cocoasudo')
+    symlink_command = os.path.join(_resource_path, 'symlinks.py')
+    subprocess.call('{} --prompt="Grow wants to make changes." python {}'.format(path, symlink_command), shell=True)
+
+
 
 class Alert(object):
 
@@ -125,7 +145,6 @@ class GrowLauncherAppDelegate(NSObject):
 def alert(message="Default Message", info_text="", buttons=["OK"]):
   ap = Alert(message)
   ap.informativeText = info_text
-  buttons.reverse()
   ap.buttons = buttons
   ap.displayAlert()
   return ap.buttonPressed
@@ -133,7 +152,7 @@ def alert(message="Default Message", info_text="", buttons=["OK"]):
 
 def check_for_updates(quiet=False):
   # Verify data.
-  version_manifest = 'https://raw.github.com/grow/macgrow/master/LICENSE'
+  version_manifest = 'https://raw.github.com/grow/macgrow/master/VERSION'
   try:
     version = urllib.urlopen(version_manifest).read()
   except:
@@ -145,7 +164,7 @@ def check_for_updates(quiet=False):
   if their_version > this_version:
     message = 'A new version of Grow ({}) is ready to download.'.format(version.strip())
     resp = alert(message=message, buttons=['Visit site', 'Cancel'])
-    if resp == 1001:
+    if resp == 1000:
       webbrowser.open('http://about.grow.io/macgrow')
     return
   if not quiet:

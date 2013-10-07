@@ -14,10 +14,10 @@
         <customObject id="-3" userLabel="Application"/>
         <menu title="GrowLauncher" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
-                <menuItem title="MacGrow" id="56">
-                    <menu key="submenu" title="MacGrow" systemMenu="apple" id="57">
+                <menuItem title="Grow" id="56">
+                    <menu key="submenu" title="Grow" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="About MacGrow" id="58">
+                            <menuItem title="About Grow for Mac" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
@@ -25,13 +25,22 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="8cC-ap-uw1"/>
                             <menuItem title="Preferences..." id="129"/>
+                            <menuItem title="Install Grow commands..." id="8Sg-Lq-5Hw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="makeSymlinksAction:" target="-1" id="KtD-gG-c86"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="143">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
                             <menuItem title="Check for Updates..." id="PdF-zm-32s">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="checkForUpdatesAction:" target="-1" id="4Ci-eh-K9B"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="143">
+                            <menuItem isSeparatorItem="YES" id="Gvx-79-QTN">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Services" id="131">
@@ -40,7 +49,7 @@
                             <menuItem isSeparatorItem="YES" id="144">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide MacGrow" keyEquivalent="h" id="134">
+                            <menuItem title="Hide Grow" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-2" id="152"/>
                                 </connections>
@@ -59,7 +68,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit MacGrow" keyEquivalent="q" id="136">
+                            <menuItem title="Quit Grow" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-2" id="139"/>
                                 </connections>

@@ -97,7 +97,7 @@
                             <rect key="frame" x="1" y="343" width="478" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="37" id="37">
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="37">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -153,6 +153,24 @@
                 <outlet property="delegate" destination="-2" id="17"/>
             </connections>
         </window>
+        <menuItem title="Item" id="JdK-Qn-LAz">
+            <modifierMask key="keyEquivalentModifierMask"/>
+        </menuItem>
+        <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="3wi-DE-ysh">
+            <allowedToolbarItems>
+                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="ztX-ao-U15"/>
+                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="eRp-3v-IBn"/>
+                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="uiM-xH-lPD"/>
+                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="g7W-WV-X1c"/>
+                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ZkS-Ay-pVt"/>
+            </allowedToolbarItems>
+            <defaultToolbarItems>
+                <toolbarItem reference="ztX-ao-U15"/>
+                <toolbarItem reference="eRp-3v-IBn"/>
+                <toolbarItem reference="ZkS-Ay-pVt"/>
+                <toolbarItem reference="uiM-xH-lPD"/>
+            </defaultToolbarItems>
+        </toolbar>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="8" height="8"/>
