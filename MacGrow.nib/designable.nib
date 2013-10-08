@@ -16,24 +16,24 @@
         <window title="Grow" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" frameAutosaveName="python browser" animationBehavior="default" id="5" userLabel="MacGrow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="181" y="326" width="544" height="182"/>
+            <rect key="contentRect" x="181" y="326" width="485" height="197"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="7">
-                <rect key="frame" x="0.0" y="0.0" width="544" height="182"/>
+                <rect key="frame" x="0.0" y="0.0" width="485" height="197"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="33">
-                        <rect key="frame" x="0.0" y="-177" width="690" height="360"/>
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="33">
+                        <rect key="frame" x="0.0" y="0.0" width="485" height="197"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" id="7Wx-cj-Fn8">
-                            <rect key="frame" x="0.0" y="17" width="690" height="343"/>
+                        <clipView key="contentView" copiesOnScroll="NO" id="7Wx-cj-Fn8">
+                            <rect key="frame" x="0.0" y="17" width="485" height="180"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="36" id="34">
-                                    <rect key="frame" x="0.0" y="0.0" width="690" height="343"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="485" height="180"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                    <size key="intercellSpacing" width="10" height="5"/>
                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <tableViewGridLines key="gridStyleMask" vertical="YES"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +44,7 @@
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" title="Text Cell" id="41">
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="left" id="41">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +75,7 @@
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </tableColumn>
-                                        <tableColumn identifier="revision_status" width="317.10546875" minWidth="10" maxWidth="3.4028234663852886e+38" id="99">
+                                        <tableColumn identifier="revision_status" width="84" minWidth="10" maxWidth="3.4028234663852886e+38" id="99">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Revision status">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -94,15 +94,15 @@
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="35">
-                            <rect key="frame" x="1" y="343" width="478" height="16"/>
+                            <rect key="frame" x="0.0" y="1" width="0.0" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="37">
-                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" id="37">
+                            <rect key="frame" x="469" y="17" width="16" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="36">
-                            <rect key="frame" x="0.0" y="0.0" width="690" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="485" height="17"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
@@ -156,25 +156,26 @@
         <menuItem title="Item" id="JdK-Qn-LAz">
             <modifierMask key="keyEquivalentModifierMask"/>
         </menuItem>
-        <toolbar implicitIdentifier="09D11707-F4A3-4FD5-970E-AC5832E91C2B" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="3wi-DE-ysh">
-            <allowedToolbarItems>
-                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="ztX-ao-U15"/>
-                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="eRp-3v-IBn"/>
-                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="uiM-xH-lPD"/>
-                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="g7W-WV-X1c"/>
-                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ZkS-Ay-pVt"/>
-            </allowedToolbarItems>
-            <defaultToolbarItems>
-                <toolbarItem reference="ztX-ao-U15"/>
-                <toolbarItem reference="eRp-3v-IBn"/>
-                <toolbarItem reference="ZkS-Ay-pVt"/>
-                <toolbarItem reference="uiM-xH-lPD"/>
-            </defaultToolbarItems>
-        </toolbar>
+        <segmentedControl verticalHuggingPriority="750" id="QM1-RM-bA8">
+            <rect key="frame" x="0.0" y="0.0" width="51" height="23"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <segmentedCell key="cell" alignment="left" style="smallSquare" trackingMode="momentary" id="zgh-KB-UVB">
+                <font key="font" metaFont="system"/>
+                <segments>
+                    <segment image="NSAddTemplate">
+                        <nil key="label"/>
+                    </segment>
+                    <segment image="NSRemoveTemplate" width="24" tag="1">
+                        <nil key="label"/>
+                    </segment>
+                </segments>
+            </segmentedCell>
+        </segmentedControl>
     </objects>
     <resources>
         <image name="NSAddTemplate" width="8" height="8"/>
         <image name="NSQuickLookTemplate" width="21" height="16"/>
+        <image name="NSRemoveTemplate" width="8" height="8"/>
         <image name="NSRevealFreestandingTemplate" width="14" height="14"/>
         <image name="NSRightFacingTriangleTemplate" width="9" height="9"/>
         <image name="NSSmartBadgeTemplate" width="15" height="15"/>

@@ -25,7 +25,7 @@
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="8cC-ap-uw1"/>
                             <menuItem title="Preferences..." id="129"/>
-                            <menuItem title="Install Grow commands..." id="8Sg-Lq-5Hw">
+                            <menuItem title="Install Grow Commands..." id="8Sg-Lq-5Hw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="makeSymlinksAction:" target="-1" id="KtD-gG-c86"/>

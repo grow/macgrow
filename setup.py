@@ -11,6 +11,7 @@ Usage:
 from distutils import core
 import py2app
 
+VERSION = open('VERSION').read().strip()
 
 OPTIONS = {
   'iconfile': 'Icon.icns',
@@ -35,8 +36,9 @@ OPTIONS = {
 }
 
 # TODO(jeremydw): Executable data files should be moved to "app".
-
 core.setup(
+  name='Grow',
+  version=VERSION,
   app=[
     'MacGrow.py'
   ],

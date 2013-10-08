@@ -15,5 +15,9 @@ def install_symlinks():
   logging.info('Installed: {} -> {}'.format(GROW_COMMAND, GROW_SYMLINK))
 
 
+def needs_installation():
+  return os.path.realpath(GROW_SYMLINK) == GROW_COMMAND
+
+
 if __name__ == '__main__':
   install_symlinks()

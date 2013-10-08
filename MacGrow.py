@@ -12,6 +12,7 @@ import webbrowser
 import sys
 sys.path.insert(0, os.path.join(_resource_path, 'pygrow'))
 
+import symlinks
 from GrowLauncherModel import GrowLauncherModel
 from grow.server import manager
 
@@ -104,6 +105,10 @@ class GrowLauncherWindowController(NSWindowController):
 
   @objc.IBAction
   def makeSymlinksAction_(self, sender):
+    if symlinks.needs_installation():
+      info_text = 'The Grow commands have already been installed to /usr/local/bin/grow.'
+      alert(message='Grow commands already installed.', info_text=info_text)
+      return
     message = 'Install Grow commands?'
     info_text = ('The "grow" command line utility can be installed on your Mac by creating a '
                  'symlink in /usr/local/bin/grow. This makes it incredibly easy to use Grow '
