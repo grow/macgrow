@@ -6,16 +6,22 @@ import os
 _resource_path = os.environ['RESOURCEPATH']
 GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'grow', 'cli.py')
 GROW_SYMLINK = '/usr/local/bin/grow'
+MACGROW_COMMAND = '/usr/local/bin/macgrow'
+MACGROW_SYMLINK = os.path.join(_resource_path, 'macgrow_cli.sh')
 
+
+def _install_symlink(source, dest):
+  if os.path.exists(source):
+    os.remove(source)
+  os.symlink(dest, source)
+  logging.info('Installed: {} -> {}'.format(source, dest))
 
 def install_symlinks():
-  if os.path.exists(GROW_SYMLINK):
-    os.remove(GROW_SYMLINK)
-  os.symlink(GROW_COMMAND, GROW_SYMLINK)
-  logging.info('Installed: {} -> {}'.format(GROW_COMMAND, GROW_SYMLINK))
+  _install_symlink(GROW_SYMLINK, GROW_COMMAND)
+  _install_symlink(MACGROW_SYMLINK, MACGROW_COMMAND)
 
 
-def needs_installation():
+def is_installed():
   return os.path.realpath(GROW_SYMLINK) == GROW_COMMAND
 
 

@@ -23,6 +23,13 @@ GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'grow', 'cli.py')
 GROW_SYMLINK = '/usr/local/bin/grow'
 
 
+class GrowLogWindowController(NSWindowController):
+  textView = objc.IBOutlet()
+
+  def __init__(self):
+    self = self.initWithWindowNibName_('MacGrow')
+
+
 # class defined in PythonBrowser.nib
 class GrowLauncherWindowController(NSWindowController):
   tableView = objc.IBOutlet()
@@ -42,6 +49,9 @@ class GrowLauncherWindowController(NSWindowController):
     # Show the window and bring it to the top.
     self.showWindow_(self)
     NSApp.activateIgnoringOtherApps_(True)
+
+    if not symlinks.is_installed():
+      _alert_and_make_symlinks()
 
     thread = threading.Thread(target=check_for_updates, args=(True,))
     thread.start()
@@ -105,21 +115,26 @@ class GrowLauncherWindowController(NSWindowController):
 
   @objc.IBAction
   def makeSymlinksAction_(self, sender):
-    if symlinks.needs_installation():
+    if symlinks.is_installed():
       info_text = 'The Grow commands have already been installed to /usr/local/bin/grow.'
       alert(message='Grow commands already installed.', info_text=info_text)
       return
-    message = 'Install Grow commands?'
-    info_text = ('The "grow" command line utility can be installed on your Mac by creating a '
-                 'symlink in /usr/local/bin/grow. This makes it incredibly easy to use Grow '
-                 'from the command line.\n\nAn authorization will be required.')
-    resp = alert(message=message, info_text=info_text, buttons=['OK', 'Cancel'])
-    if resp != 1000:
-      return
-    path = os.path.join(_resource_path, 'cocoasudo')
-    symlink_command = os.path.join(_resource_path, 'symlinks.py')
-    subprocess.call('{} --prompt="Grow wants to make changes." python {}'.format(path, symlink_command), shell=True)
+    _alert_and_make_symlinks()
 
+
+def _alert_and_make_symlinks():
+  message = 'Install Grow commands?'
+  info_text = ('The "grow" command line utility can be installed on your Mac by creating a '
+               'symlink in /usr/local/bin/grow. This makes it incredibly easy to use Grow '
+               'from the command line.\n\nAn authorization will be required.')
+  resp = alert(message=message, info_text=info_text, buttons=['OK', 'Cancel'])
+  if resp != 1000:
+    return
+  path = os.path.join(_resource_path, 'cocoasudo')
+  symlink_command = os.path.join(_resource_path, 'symlinks.py')
+  subprocess.call('{} --prompt="Grow wants to make changes." python {}'.format(path, symlink_command), shell=True)
+  info_text = 'Now you can use "grow" from Terminal!'
+  alert(message='Grow commands created.', info_text=info_text)
 
 
 class Alert(object):

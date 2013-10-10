@@ -5,6 +5,7 @@ VERSION=`cat VERSION`
 cd dist
 chmod +x Grow.app/Contents/Resources/cocoasudo
 chmod +x Grow.app/Contents/Resources/pygrow/grow/cli.py
+chmod +x Grow.app/Contents/Resources/macgrow_cli.py
 zip -r Grow-${VERSION}.zip Grow.app
 cd ..
 echo "Built: dist/Grow-${VERSION}.zip"

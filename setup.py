@@ -38,6 +38,10 @@ OPTIONS = {
 # TODO(jeremydw): Executable data files should be moved to "app".
 core.setup(
   name='Grow',
+  description='A fast, portable, simple, but powerful web site builder and file-based content management system for teams.',
+  url='http://grow.io',
+  author='Jeremy Weinstein',
+  author_email='jeremydw@grow.io',
   version=VERSION,
   app=[
     'MacGrow.py'
@@ -49,7 +53,7 @@ core.setup(
     'cocoasudo',
     'pygrow',
     'symlinks.py',
+    'macgrow_cli.sh',
   ],
-  url='http://grow.io',
   options={'py2app': OPTIONS},
 )
