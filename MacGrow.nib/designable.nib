@@ -17,7 +17,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="181" y="326" width="485" height="197"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="7">
                 <rect key="frame" x="0.0" y="0.0" width="485" height="197"/>
@@ -173,19 +173,11 @@
                 </segments>
             </segmentedCell>
         </segmentedControl>
-        <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" id="tZF-41-PtR">
-            <rect key="frame" x="0.0" y="0.0" width="179" height="20"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="navigationBar" id="ivF-jI-hWe">
-                <font key="font" metaFont="smallSystem"/>
-                <url key="url" string="file://localhost/Applications/"/>
-            </pathCell>
-        </pathControl>
         <window identifier="LogWindow" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="Sop-0Q-cof" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="272" y="172" width="384" height="246"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="Z4D-iv-X7Z">
                 <rect key="frame" x="0.0" y="0.0" width="384" height="246"/>
                 <autoresizingMask key="autoresizingMask"/>
