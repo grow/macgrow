@@ -5,7 +5,8 @@ from Foundation import *
 import os
 _resource_path = os.environ['RESOURCEPATH']
 
-import urllib
+import logging
+import pipes
 import threading
 import subprocess
 import webbrowser
@@ -15,10 +16,10 @@ sys.path.insert(0, os.path.join(_resource_path, 'pygrow'))
 import symlinks
 from GrowLauncherModel import GrowLauncherModel
 from grow.server import manager
+from grow.common import sdk_utils
 
 # /usr/local/bin
 
-VERSION = open(os.path.join(_resource_path, 'VERSION')).read().strip()
 GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'grow', 'cli.py')
 GROW_SYMLINK = '/usr/local/bin/grow'
 
@@ -53,7 +54,7 @@ class GrowLauncherWindowController(NSWindowController):
     if not symlinks.is_installed():
       _alert_and_make_symlinks()
 
-    thread = threading.Thread(target=check_for_updates, args=(True,))
+    thread = threading.Thread(target=check_for_updates)
     thread.start()
 
     # Prevent garbage collection before window is closed.
@@ -111,7 +112,7 @@ class GrowLauncherWindowController(NSWindowController):
 
   @objc.IBAction
   def checkForUpdatesAction_(self, sender):
-    check_for_updates(quiet=False)
+    check_for_updates()
 
   @objc.IBAction
   def makeSymlinksAction_(self, sender):
@@ -125,16 +126,16 @@ class GrowLauncherWindowController(NSWindowController):
 def _alert_and_make_symlinks():
   message = 'Install Grow commands?'
   info_text = ('The "grow" command line utility can be installed on your Mac by creating a '
-               'symlink in /usr/local/bin/grow. This makes it incredibly easy to use Grow '
-               'from the command line.\n\nAn authorization will be required.')
+               'symlink in /usr/local/bin/grow.\n\nAn authorization will be required.')
   resp = alert(message=message, info_text=info_text, buttons=['OK', 'Cancel'])
   if resp != 1000:
     return
-  path = os.path.join(_resource_path, 'cocoasudo')
-  symlink_command = os.path.join(_resource_path, 'symlinks.py')
-  subprocess.call('{} --prompt="Grow wants to make changes." python {}'.format(path, symlink_command), shell=True)
-  info_text = 'Now you can use "grow" from Terminal!'
-  alert(message='Grow commands created.', info_text=info_text)
+  path = pipes.quote(os.path.join(_resource_path, 'cocoasudo'))
+  symlink_command = pipes.quote(os.path.join(_resource_path, 'symlinks.py'))
+  command = '{} --prompt="Grow wants to make changes." python {}'.format(path, symlink_command)
+  subprocess.call(command, shell=True)
+  info_text = 'Now you can open Terminal and run "grow" to use the SDK.'
+  alert(message='Grow commands installed.', info_text=info_text)
 
 
 class Alert(object):
@@ -159,10 +160,20 @@ class Alert(object):
 class GrowLauncherAppDelegate(NSObject):
 
   def applicationDidFinishLaunching_(self, notification):
-    GrowLauncherWindowController()
+    if check_for_updates():
+      AppHelper.stopEventLoop()  # Exit if the user opened the web browser.
+      return
+
+    if symlinks.is_installed():
+      alert('The "grow" command is already installed. Open Terminal and run "grow" to use the SDK.')
+    else:
+      _alert_and_make_symlinks()
+
+    AppHelper.stopEventLoop()
+#    GrowLauncherWindowController()
 
 
-def alert(message="Default Message", info_text="", buttons=["OK"]):
+def alert(message='Default Message', info_text='', buttons=['OK']):
   ap = Alert(message)
   ap.informativeText = info_text
   ap.buttons = buttons
@@ -170,30 +181,19 @@ def alert(message="Default Message", info_text="", buttons=["OK"]):
   return ap.buttonPressed
 
 
-def check_for_updates(quiet=False):
-  # Verify data.
-  version_manifest = 'https://raw.github.com/grow/macgrow/master/VERSION'
-  try:
-    version = urllib.urlopen(version_manifest).read()
-  except:
-    if quiet:
-      return
-    raise
-  their_version = version.strip().replace('.', '')
-  this_version = VERSION.replace('.', '')
+def check_for_updates():
+  their_version = sdk_utils.get_latest_version()
+  this_version = sdk_utils.get_this_version()
   if their_version > this_version:
-    message = 'A new version of Grow ({}) is ready to download.'.format(version.strip())
-    resp = alert(message=message, buttons=['Visit site', 'Cancel'])
+    message = 'A new version of the Grow SDK is ready to download.'
+    info_text = 'Your version: {}, Latest version: {}'.format(this_version, their_version)
+    resp = alert(message=message, buttons=['Visit site', 'Cancel'], info_text=info_text)
     if resp == 1000:
-      webbrowser.open('http://about.grow.io/macgrow')
-    return
-  if not quiet:
-    if this_version > their_version:
-      info_text = 'And, yours is newer! ({})'.format(VERSION)
-    else:
-      info_text = ''
-    alert('Awesome! You have the latest version of Grow ({}).'.format(version.strip()),
-          info_text=info_text)
+      webbrowser.open('http://growapp.org')
+      return True
+  else:
+    info_text = 'Your version: {}, Latest version: {}'.format(this_version, their_version)
+    alert('You have the latest version of the Grow SDK ({}).'.format(this_version), info_text=info_text)
 
 
 if __name__ == '__main__':

@@ -16,9 +16,10 @@ def _install_symlink(source, dest):
   os.symlink(dest, source)
   logging.info('Installed: {} -> {}'.format(source, dest))
 
+
 def install_symlinks():
   _install_symlink(GROW_SYMLINK, GROW_COMMAND)
-  _install_symlink(MACGROW_SYMLINK, MACGROW_COMMAND)
+#  _install_symlink(MACGROW_SYMLINK, MACGROW_COMMAND)
 
 
 def is_installed():

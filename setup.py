@@ -11,7 +11,11 @@ Usage:
 from distutils import core
 import py2app
 
-VERSION = open('VERSION').read().strip()
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'pygrow'))
+from grow.common import sdk_utils
+
 
 OPTIONS = {
   'iconfile': 'Icon.icns',
@@ -24,6 +28,7 @@ OPTIONS = {
     'json',
     'md5',
     'multiprocessing',
+    'pipes',
     'sha',
     'shutil',
     'urllib',
@@ -37,19 +42,18 @@ OPTIONS = {
 
 # TODO(jeremydw): Executable data files should be moved to "app".
 core.setup(
-  name='Grow',
+  name='Grow SDK',
   description='A fast, portable, simple, but powerful web site builder and file-based content management system for teams.',
-  url='http://grow.io',
+  url='http://growapp.org',
   author='Jeremy Weinstein',
   author_email='jeremydw@grow.io',
-  version=VERSION,
+  version=sdk_utils.get_this_version(),
   app=[
     'MacGrow.py'
   ],
   data_files=[
     'MacGrow.nib',
     'MainMenu.nib',
-    'VERSION',
     'cocoasudo',
     'pygrow',
     'symlinks.py',
