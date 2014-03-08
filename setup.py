@@ -10,7 +10,7 @@ Usage:
 
 from distutils import core
 import py2app
-
+import setuptools
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'pygrow'))
@@ -18,7 +18,7 @@ from grow.common import sdk_utils
 
 
 OPTIONS = {
-  'iconfile': 'Icon.icns',
+  'iconfile': 'icon.icns',
   'includes': [
     'BaseHTTPServer',
     'Queue',
@@ -37,16 +37,20 @@ OPTIONS = {
     'wsgiref.handlers',
     'xml',
     'xml.etree.ElementTree',
-  ]
+  ],
+  'packages': setuptools.find_packages() + ['jinja2'],
 }
 
 # TODO(jeremydw): Executable data files should be moved to "app".
 core.setup(
   name='Grow SDK',
-  description='A fast, portable, simple, but powerful web site builder and file-based content management system for teams.',
-  url='http://growapp.org',
-  author='Jeremy Weinstein',
-  author_email='jeremydw@grow.io',
+    description=(
+          'Develop everywhere and deploy anywhere: a declarative '
+          'static site generator/CMS for building high-quality web sites.'
+    ),
+  url='http://growsdk.org',
+  author='Grow SDK Authors',
+  author_email='hello@grow.io',
   version=sdk_utils.get_this_version(),
   app=[
     'MacGrow.py'
@@ -55,9 +59,10 @@ core.setup(
     'MacGrow.nib',
     'MainMenu.nib',
     'cocoasudo',
+    'icon.png',
+    'macgrow_cli.sh',
     'pygrow',
     'symlinks.py',
-    'macgrow_cli.sh',
   ],
   options={'py2app': OPTIONS},
 )

@@ -20,7 +20,7 @@ from grow.common import sdk_utils
 
 # /usr/local/bin
 
-GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'grow', 'cli.py')
+GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'bin', 'grow')
 GROW_SYMLINK = '/usr/local/bin/grow'
 
 
@@ -132,10 +132,14 @@ def _alert_and_make_symlinks():
     return
   path = pipes.quote(os.path.join(_resource_path, 'cocoasudo'))
   symlink_command = pipes.quote(os.path.join(_resource_path, 'symlinks.py'))
-  command = '{} --prompt="Grow wants to make changes." python {}'.format(path, symlink_command)
-  subprocess.call(command, shell=True)
-  info_text = 'Now you can open Terminal and run "grow" to use the SDK.'
-  alert(message='Grow commands installed.', info_text=info_text)
+  icon_path = pipes.quote(os.path.join(_resource_path, 'icon.png'))
+  text = '{} --icon={} --prompt="Grow wants to make changes." python {}'
+  command = text.format(path, icon_path, symlink_command)
+  print command
+  resp = subprocess.call(command, shell=True)  # resp is 0 when ok, 1 when fail.
+  if resp == 0:
+    info_text = 'Now you can open Terminal and run "grow" to use the SDK.'
+    alert(message='Grow commands installed.', info_text=info_text)
 
 
 class Alert(object):
@@ -160,7 +164,7 @@ class Alert(object):
 class GrowLauncherAppDelegate(NSObject):
 
   def applicationDidFinishLaunching_(self, notification):
-    if check_for_updates():
+    if check_for_updates(quiet=True):
       AppHelper.stopEventLoop()  # Exit if the user opened the web browser.
       return
 
@@ -181,17 +185,17 @@ def alert(message='Default Message', info_text='', buttons=['OK']):
   return ap.buttonPressed
 
 
-def check_for_updates():
+def check_for_updates(quiet=False):
   their_version = sdk_utils.get_latest_version()
   this_version = sdk_utils.get_this_version()
   if their_version > this_version:
     message = 'A new version of the Grow SDK is ready to download.'
     info_text = 'Your version: {}, Latest version: {}'.format(this_version, their_version)
-    resp = alert(message=message, buttons=['Visit site', 'Cancel'], info_text=info_text)
+    resp = alert(message=message, buttons=['Visit site', 'Ignore'], info_text=info_text)
     if resp == 1000:
-      webbrowser.open('http://growapp.org')
+      webbrowser.open('http://growsdk.org')
       return True
-  else:
+  elif not quiet:
     info_text = 'Your version: {}, Latest version: {}'.format(this_version, their_version)
     alert('You have the latest version of the Grow SDK ({}).'.format(this_version), info_text=info_text)
 

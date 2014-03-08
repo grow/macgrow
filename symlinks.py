@@ -4,7 +4,7 @@ import logging
 import os
 
 _resource_path = os.environ['RESOURCEPATH']
-GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'grow', 'cli.py')
+GROW_COMMAND = os.path.join(_resource_path, 'pygrow', 'bin', 'grow')
 GROW_SYMLINK = '/usr/local/bin/grow'
 MACGROW_COMMAND = '/usr/local/bin/macgrow'
 MACGROW_SYMLINK = os.path.join(_resource_path, 'macgrow_cli.sh')
