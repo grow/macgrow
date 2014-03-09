@@ -1,10 +1,14 @@
 #!/bin/bash
-rm -rf dist
-python setup.py py2app
+rm -rf build
 VERSION=`cat pygrow/grow/VERSION`
+pyinstaller grow.spec
+#sips -i macgrow/icon.icns
+#DeRez -only icns macgrow/icon.icns > build/tmpicon.rsrc
+#Rez -append build/tmpicon.rsrc -o dist/grow
+#SetFile -a C dist/grow
+#rm build/tmpicon.rsrc
+chmod +x dist/grow
 cd dist
-chmod +x Grow\ SDK.app/Contents/Resources/cocoasudo
-chmod +x Grow\ SDK.app/Contents/Resources/pygrow/bin/grow
-zip -r Grow-SDK-${VERSION}.zip Grow\ SDK.app
+zip -r Grow-SDK-${VERSION}.zip grow
 cd ..
 echo "Built: dist/Grow-SDK-${VERSION}.zip"

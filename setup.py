@@ -18,28 +18,31 @@ from grow.common import sdk_utils
 
 
 OPTIONS = {
+  'site_packages': True,
   'iconfile': 'icon.icns',
   'includes': [
-    'BaseHTTPServer',
-    'Queue',
-    'cgi',
-    'htmlentitydefs',
-    'io',
-    'json',
-    'md5',
-    'multiprocessing',
-    'pipes',
-    'sha',
-    'shutil',
-    'urllib',
-    'urllib2',
-    'wsgiref',
-    'wsgiref.handlers',
-    'xml',
-    'xml.etree.ElementTree',
+      'BaseHTTPServer',
+      'Queue',
+      'cgi',
+      'htmlentitydefs',
+      'io',
+      'json',
+      'md5',
+      'multiprocessing',
+      'pipes',
+      'sha',
+      'shutil',
+      'urllib',
+      'urllib2',
+      'wsgiref',
+      'wsgiref.handlers',
+      'xml',
+      'xml.etree.ElementTree',
   ],
-  'packages': setuptools.find_packages() + ['jinja2'],
+  'packages': ['jinja2', 'google.apputils', 'paste.httpserver'],
 }
+
+#setuptools.find_packages() +
 
 # TODO(jeremydw): Executable data files should be moved to "app".
 core.setup(
